@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check player
         run: |
-          UUID=$(curl -s https://api.mojang.com/users/profiles/minecraft/hubiwek13453 | jq -r '.id')
+          UUID=$(curl -s https://api.mojang.com/users/profiles/minecraft/Keelower_ | jq -r '.id')
           ONLINE=$(curl -s -H "API-Key: 57c1050c-ec4a-4221-a313-fc56f4867db8" "https://api.hypixel.net/v2/status?uuid=$UUID" | jq -r '.session.online')
 
           echo "Online: $ONLINE"
