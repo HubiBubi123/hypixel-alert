@@ -1,0 +1,22 @@
+name: Hypixel Alert
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check player
+        run: |
+          UUID=$(curl -s https://api.mojang.com/users/profiles/minecraft/hubiwek13453 | jq -r '.id')
+          ONLINE=$(curl -s -H "API-Key: 57c1050c-ec4a-4221-a313-fc56f4867db8" "https://api.hypixel.net/v2/status?uuid=$UUID" | jq -r '.session.online')
+
+          echo "Online: $ONLINE"
+
+          if [ "$ONLINE" = "true" ]; then
+            curl -d "hubiwek13453 jest ONLINE na Hypixelu!" https://ntfy.sh/hypixel-alert-928371
+          fi
